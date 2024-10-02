@@ -2,3 +2,4 @@ huggingface_hub==0.22.2
 torch
 transformers==4.31.0
 accelerate==0.21.0
+safetensors
