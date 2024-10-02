@@ -1,5 +1,6 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
 # Load your fine-tuned model and tokenizer
