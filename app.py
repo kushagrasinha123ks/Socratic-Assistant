@@ -2,12 +2,20 @@ import gradio as gr
 from huggingface_hub import InferenceClient
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
-
 # Load your fine-tuned model and tokenizer
 model_name = "kush19/Llama-2-7b-chat-finetune"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
 
+# Set offload folder
+offload_folder = "./offload"  
+
+# Load the model with offload folder specified
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype=torch.float16,
+    device_map="auto",  # Automatically assigns layers to devices (CPU/GPU)
+    offload_folder=offload_folder,  # This allows weights to be offloaded to disk when necessary
+)
 """
 For more information on `huggingface_hub` Inference API support, please check the docs: https://huggingface.co/docs/huggingface_hub/v0.22.2/en/guides/inference
 """
